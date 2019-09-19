@@ -13,7 +13,8 @@ class SearchBar extends React.Component {
         // i.e.: on ENTER submit data to backend and refresh the page
         event.preventDefault();
 
-        console.log(this.state.term);
+        // Parent callback invoked - to pass data to parent
+        this.props.formSubmitted(this.state.term);
     }
 
     render() {
