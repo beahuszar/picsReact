@@ -6,10 +6,20 @@ class SearchBar extends React.Component {
     // Information is stored in the state instead of DOM - more easily managable
     state = { term: ''};
 
+    // With the arrow function syntax we can use 'this' prefix
+    // as this way, 'state' remains in context
+    onFormSubmit = event => {
+        // Stops the default vanillaJS behaviour
+        // i.e.: on ENTER submit data to backend and refresh the page
+        event.preventDefault();
+
+        console.log(this.state.term);
+    }
+
     render() {
         return (
             <div className="ui segment">
-                <form className="ui form">
+                <form onSubmit={this.onFormSubmit} className="ui form">
                     <div className="field">
                         <label>Image search</label>
                         <input 
