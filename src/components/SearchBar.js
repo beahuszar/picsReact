@@ -2,11 +2,9 @@ import React from 'react';
 
 class SearchBar extends React.Component {
 
-    // called by onChange JSX prop
-    // no parenteses needed in JSX, as it is a callback
-    onInputChange(event) {
-        console.log(event.target.value);
-    }
+    // Controlled element - preferred
+    // Information is stored in the state instead of DOM - more easily managable
+    state = { term: ''};
 
     render() {
         return (
@@ -14,7 +12,11 @@ class SearchBar extends React.Component {
                 <form className="ui form">
                     <div className="field">
                         <label>Image search</label>
-                        <input type="text" onChange={this.onInputChange}></input>
+                        <input 
+                            type="text" 
+                            value={this.state.term} 
+                            onChange={e => this.setState({ term: e.target.value })} 
+                        />
                     </div>
                 </form>
             </div>
