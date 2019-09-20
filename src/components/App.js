@@ -3,7 +3,10 @@ import axios from 'axios';
 import SearchBar from './SearchBar'
 
 class App extends React.Component {
-    async onSearchSubmit(term) {
+    state = { images: [] };
+
+    // have to be arrow function iot "this.setState" can be used
+    onSearchSubmit = async (term) => {
         // Endpoint  + an object for request specification
         const response = await axios.get('https://api.unsplash.com/search/photos', {
             params: { query: term },
@@ -12,13 +15,14 @@ class App extends React.Component {
             }
         });
 
-        console.log(response.data.results);
+        this.setState({ images: response.data.results });
     };
 
     render() {
         return (
             <div className="ui container" style={{ marginTop: '10px' }}>
                 <SearchBar formSubmitted={this.onSearchSubmit} />
+                Found: {this.state.images.length} number of images.
             </div>
         );
     };
