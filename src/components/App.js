@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import unsplash from '../api/unsplash';
 import SearchBar from './SearchBar'
 
 class App extends React.Component {
@@ -8,11 +8,8 @@ class App extends React.Component {
     // have to be arrow function iot "this.setState" can be used
     onSearchSubmit = async (term) => {
         // Endpoint  + an object for request specification
-        const response = await axios.get('https://api.unsplash.com/search/photos', {
+        const response = await unsplash.get('/search/photos', {
             params: { query: term },
-            headers: {
-                Authorization: 'Client-ID cacffa66c2846ef57a79d530cc918ee0c604dcb5cd5eea7f4dbea2eca5dbeac1'
-            }
         });
 
         this.setState({ images: response.data.results });
